@@ -8,6 +8,7 @@ import java.util.Scanner;
 /**
  * Title: Main class per il calcolo della media
  * Created by Davide Sordi on 16/02/2018 at 15.18.
+ * commento di prova
  */
 
 public class CalcolatoreMedia {
