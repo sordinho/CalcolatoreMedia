@@ -1,1 +1,0 @@
-Inserire un esame per riga scrivendo: nome crediti e voto (se presente) SEPARATI DA PUNTO E VIRGOLA ;
