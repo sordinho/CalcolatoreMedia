@@ -12,6 +12,57 @@ public class CalcolatoreMedia {
 	private List<String> lettura = Utility.readLines("esami.txt");
 	private Map<Integer, Esame> esami = Utility.elaboraEsami(lettura);
 
+
+	public static void main(String[] args) {
+		CalcolatoreMedia calcolatoreMedia = new CalcolatoreMedia();
+		Character cmd = 'E';
+		Scanner in = new Scanner(System.in);
+		do {
+			printMenu();
+			cmd = in.next().charAt(0);
+			switch (cmd) {
+				case 'L':
+				case 'l':
+					calcolatoreMedia.stampaLibretto();
+					break;
+				case 'M':
+				case 'm':
+					calcolatoreMedia.calcolaMedia();
+					break;
+				case 'N':
+				case 'n':
+					calcolatoreMedia.stampaEsamiDaDare();
+					break;
+				case 'P':
+				case 'p':
+					calcolatoreMedia.stampaEsamiDaDare();
+					calcolatoreMedia.previsione();
+					break;
+				case 'D':
+				case 'd':
+					calcolatoreMedia.deletePrevisione();
+					break;
+				case 'E':
+				case 'e':
+					System.out.println("Fine del programma");
+					break;
+				default:
+					System.out.println("Errore comando non valido");
+			}
+		} while (cmd != 'e' && cmd != 'E');
+	}
+
+	static void printMenu() {
+		System.out.println("-----------------------------------------------------");
+		System.out.println("L per vedere il libretto");
+		System.out.println("N per la lista degli esami da dare");
+		System.out.println("P per la previsione di un voto");
+		System.out.println("M per il calcolo della media attuale");
+		System.out.println("D per eliminare la previsione di un voto");
+		System.out.println("E per uscire");
+		System.out.println("---------------------------------------------------->");
+	}
+
 	public void stampaLibretto() {
 		System.out.println("ESAME - VOTO - CREDITI");
 		for (Esame e : esami.values()) {
@@ -33,9 +84,9 @@ public class CalcolatoreMedia {
 
 	public void calcolaMedia() {
 		double media = 0;
-		double mediap=0;
+		double mediap = 0;
 		int crediti = 0;
-		int creditip=0;
+		int creditip = 0;
 
 		for (Esame e : esami.values()) {
 			if (e.pass()) {
@@ -44,15 +95,15 @@ public class CalcolatoreMedia {
 				mediap += e.getCrediti() * e.getVoto();
 				creditip += e.getCrediti();
 			}
-			if(e.previsto()) {
+			if (e.previsto()) {
 				mediap += e.getCrediti() * e.getVoto();
-				creditip+=e.getCrediti();
+				creditip += e.getCrediti();
 			}
 		}
 		media = media / crediti;
-		mediap=mediap/creditip;
-		System.out.println("Media di: " + String.format("%.2f",media) + " calcolata su " + crediti + " crediti");
-		System.out.println("Media con previsioni di: " + String.format("%.2f",mediap) + " calcolata su " + creditip + " crediti");
+		mediap = mediap / creditip;
+		System.out.println("Media di: " + String.format("%.2f", media) + " calcolata su " + crediti + " crediti");
+		System.out.println("Media con previsioni di: " + String.format("%.2f", mediap) + " calcolata su " + creditip + " crediti");
 		return;
 	}
 
@@ -61,68 +112,44 @@ public class CalcolatoreMedia {
 		Scanner in = new Scanner(System.in);
 		System.out.println("Inserisci il codice di un esame non dato");
 		code = in.nextInt();
-		if(esami.get(code)==null){
+		if (esami.get(code) == null) {
 			System.out.println("Codice inserito non valido");
 			return;
 		}
-		Esame exam=esami.get(code);
+		Esame exam = esami.get(code);
 		System.out.println("Inserisci il voto che pensi di prendere");
-		int voto=in.nextInt();
+		int voto = in.nextInt();
 		exam.setVoto(voto);
 	}
 
-    public static void main(String[] args) {
+	private void deletePrevisione() {
+		int code;
 
-        CalcolatoreMedia calcolatoreMedia = new CalcolatoreMedia();
+		//stampa esami previsti se presenti
+		if (esami.values().stream().filter(Esame::previsto).count() == 0) {
+			System.out.println("Non ci sono esami previsti");
+			return;
+		}
 
-        Character cmd ='E';
-        Scanner in = new Scanner(System.in);
-        do {
-            printMenu();
-            cmd = in.next().charAt(0);
-            switch (cmd) {
-                case 'L':
-                case 'l':
-                    calcolatoreMedia.stampaLibretto();
-                    break;
-                case 'M':
-                case 'm':
-                    calcolatoreMedia.calcolaMedia();
-                    break;
-                case 'N':
-                case 'n':
-                    calcolatoreMedia.stampaEsamiDaDare();
-                    break;
-                case 'P':
-                case 'p':
-                    calcolatoreMedia.stampaEsamiDaDare();
-                    calcolatoreMedia.previsione();
-                    break;
-                case 'D':
-                case 'd':
-                    //calcolatoreMedia.deletePrevisione();
-                    break;
-                case 'E':
-                case 'e':
-                    System.out.println("Fine del programma");
-                    break;
-                default:
-                    System.out.println("Errore comando non valido");
-            }
+		this.stampaEsamiPrevisti();
+		Scanner in = new Scanner(System.in);
+		System.out.println("Inserisci il codice di un esame non dato");
+		code = in.nextInt();
+		Esame exam = esami.get(code);
+		if (exam == null) {
+			System.out.println("Codice inserito non valido");
+			return;
+		}
+		exam.unsetPrevisto();
+	}
 
+	private void stampaEsamiPrevisti() {
+		System.out.println("CODICE - ESAME - CREDITI - VOTO");
+		for (Esame e : esami.values()) {
+			if (e.previsto())
+				System.out.println(e.geCodice() + " - " + e.getNome() + " - " + e.getCrediti() + " - " + e.getVoto());
+		}
+		return;
 
-        } while (cmd != 'e' && cmd != 'E');
-
-    }
-
-    static void printMenu() {
-        System.out.println("-----------------------------------------------------");
-        System.out.println("L per vedere il libretto");
-        System.out.println("N per la lista degli esami da dare");
-        System.out.println("P per la previsione di un voto");
-        System.out.println("M per il calcolo della media attuale");
-        System.out.println("D per eliminare la previsione di un voto");
-        System.out.println("E per uscire");
-        System.out.println("---------------------------------------------------->");
-    }
+	}
 }
