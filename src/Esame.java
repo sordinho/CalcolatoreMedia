@@ -5,57 +5,62 @@
 
 public class Esame {
 
-    private String nome;
-    private int crediti;
-    private int voto;
-    private boolean passato;
-    private int codice;
-    private boolean previsto;
+	private String nome;
+	private int crediti;
+	private int voto;
+	private boolean passato;
+	private int codice;
+	private boolean previsto;
 
-    public Esame(String nome, int crediti,int codice, int voto) {
-        this.nome = nome;
-        this.crediti = crediti;
-        this.voto = voto;
-        this.passato = true;
-        this.codice=codice;
-        this.previsto=false;
-    }
+	public Esame(String nome, int crediti,int codice, int voto) {
+		this.nome = nome;
+		this.crediti = crediti;
+		this.voto = voto;
+		this.passato = true;
+		this.codice=codice;
+		this.previsto=false;
+	}
 
-    public Esame(String nome, int crediti,int codice) {
-        this.nome = nome;
-        this.crediti = crediti;
-        this.voto = -1;
-        this.passato = false;
-        this.codice=codice;
-        this.previsto=false;
-    }
+	public Esame(String nome, int crediti,int codice) {
+		this.nome = nome;
+		this.crediti = crediti;
+		this.voto = -1;
+		this.passato = false;
+		this.codice=codice;
+		this.previsto=false;
+	}
 
-    public boolean pass() {
-        return passato;
-    }
+	public boolean pass() {
+		return passato;
+	}
 
-    public String getNome() {
-        return nome;
-    }
+	public String getNome() {
+		return nome;
+	}
 
-    public int getCrediti() {
-        return crediti;
-    }
+	public int getCrediti() {
+		return crediti;
+	}
 
-    public int getVoto() {
-        return voto;
-    }
+	public int getVoto() {
+		return voto;
+	}
 
-    public int geCodice() {
-        return codice;
-    }
+	public int geCodice() {
+		return codice;
+	}
 
-    public void setVoto(int voto){
-        previsto=true;
-        this.voto=voto;
-    }
+	public void setVoto(int voto){
+		previsto=true;
+		this.voto=voto;
+	}
 
-    public boolean previsto() {
-        return previsto;
-    }
+	public boolean previsto() {
+		return previsto;
+	}
+
+	public void unsetPrevisto() {
+	this.previsto=false;
+	this.voto=-1;
+	}
 }
