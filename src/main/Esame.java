@@ -1,9 +1,11 @@
+import java.io.Serializable;
+
 /**
  * Title: Esame classe per la descrizione di un esame
  * Created by Davide Sordi on 16/02/2018 at 15.06.
  */
 
-public class Esame {
+public class Esame implements Serializable {
 
 	private String nome;
 	private int crediti;
@@ -46,7 +48,7 @@ public class Esame {
 		return voto;
 	}
 
-	public int geCodice() {
+	public int getCodice() {
 		return codice;
 	}
 
@@ -55,7 +57,7 @@ public class Esame {
 		this.voto=voto;
 	}
 
-	public boolean previsto() {
+	public boolean getPrevisto() {
 		return previsto;
 	}
 
