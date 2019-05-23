@@ -1,3 +1,5 @@
+package main;
+
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -82,30 +84,7 @@ public class CalcolatoreMedia {
 		return;
 	}
 
-	public void calcolaMedia() {
-		double media = 0;
-		double mediap = 0;
-		int crediti = 0;
-		int creditip = 0;
 
-		for (Esame e : esami.values()) {
-			if (e.pass()) {
-				media += e.getCrediti() * e.getVoto();
-				crediti += e.getCrediti();
-				mediap += e.getCrediti() * e.getVoto();
-				creditip += e.getCrediti();
-			}
-			if (e.previsto()) {
-				mediap += e.getCrediti() * e.getVoto();
-				creditip += e.getCrediti();
-			}
-		}
-		media = media / crediti;
-		mediap = mediap / creditip;
-		System.out.println("Media di: " + String.format("%.2f", media) + " calcolata su " + crediti + " crediti");
-		System.out.println("Media con previsioni di: " + String.format("%.2f", mediap) + " calcolata su " + creditip + " crediti");
-		return;
-	}
 
 	public void previsione() {
 		int code;

@@ -1,3 +1,5 @@
+import main.Esame;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -41,23 +43,25 @@ public class Utility {
 
 		Map<Integer, Esame> esami = new HashMap<>();
 		int i = 1;
-		for (String row : rows) {
+		if (rows!=null) {
+			for (String row : rows) {
 
-			String[] campi = row.split(";");
+				String[] campi = row.split(";");
 
-			String nome = campi[0];
-			int crediti = Integer.parseInt(campi[1]);
+				String nome = campi[0];
+				int crediti = Integer.parseInt(campi[1]);
 
-			if (campi.length == 3) {
-				int voto = Integer.parseInt(campi[2]);
-				Esame e = new Esame(nome, crediti, i, voto);
-				esami.put(i, e);
-			} else {
-				Esame e = new Esame(nome, crediti, i);
-				esami.put(i, e);
+				if (campi.length == 3) {
+					int voto = Integer.parseInt(campi[2]);
+					Esame e = new Esame(nome, crediti, i, voto);
+					esami.put(i, e);
+				} else {
+					Esame e = new Esame(nome, crediti, i);
+					esami.put(i, e);
+				}
+				i++;
+
 			}
-			i++;
-
 		}
 		return esami;
 	}

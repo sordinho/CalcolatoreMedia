@@ -1,7 +1,9 @@
+package main;
+
 import java.io.Serializable;
 
 /**
- * Title: Esame classe per la descrizione di un esame
+ * Title: main.Esame classe per la descrizione di un esame
  * Created by Davide Sordi on 16/02/2018 at 15.06.
  */
 
@@ -14,22 +16,22 @@ public class Esame implements Serializable {
 	private int codice;
 	private boolean previsto;
 
-	public Esame(String nome, int crediti,int codice, int voto) {
+	public Esame(String nome, int crediti, int codice, int voto) {
 		this.nome = nome;
 		this.crediti = crediti;
 		this.voto = voto;
 		this.passato = true;
-		this.codice=codice;
-		this.previsto=false;
+		this.codice = codice;
+		this.previsto = false;
 	}
 
-	public Esame(String nome, int crediti,int codice) {
+	public Esame(String nome, int crediti, int codice) {
 		this.nome = nome;
 		this.crediti = crediti;
 		this.voto = -1;
 		this.passato = false;
-		this.codice=codice;
-		this.previsto=false;
+		this.codice = codice;
+		this.previsto = false;
 	}
 
 	public boolean pass() {
@@ -52,9 +54,9 @@ public class Esame implements Serializable {
 		return codice;
 	}
 
-	public void setVoto(int voto){
-		previsto=true;
-		this.voto=voto;
+	public void setVoto(int voto) {
+		previsto = true;
+		this.voto = voto;
 	}
 
 	public boolean getPrevisto() {
@@ -62,7 +64,7 @@ public class Esame implements Serializable {
 	}
 
 	public void unsetPrevisto() {
-	this.previsto=false;
-	this.voto=-1;
+		this.previsto = false;
+		this.voto = -1;
 	}
 }
